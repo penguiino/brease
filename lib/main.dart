@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
     // Enable wakelock to keep the screen on
     Wakelock.enable();
 
-    _timer = Timer.periodic(Duration(milliseconds: 50), (timer) {
+    _timer = Timer.periodic(const Duration(milliseconds: 50), (timer) {
       setState(() {
         _progress += 0.05 / _seconds;
         if (_progress >= 1.0) {
@@ -84,11 +84,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //appBar: AppBar(title: Text('Brease')),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/background.jpeg'), // Path to your background image
+            image: AssetImage('assets/background.jpeg'),
             fit: BoxFit.cover,
           ),
         ),
@@ -102,11 +101,11 @@ class _HomePageState extends State<HomePage> {
                 percent: _progress,
                 center: Text(
                   _phase,
-                  style: TextStyle(fontSize: 40.0, color: Colors.white70), // Changed color to white
+                  style: const TextStyle(fontSize: 40.0, color: Colors.white70), // Changed color to white
                 ),
                 progressColor: Colors.blue,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -116,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                     },
                     child: Text(_isRunning && _currentTimer == 'short' ? 'Stop' : 'Short'),
                   ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   ElevatedButton(
                     onPressed: _isRunning && _currentTimer == 'long' ? _stopTimer : () {
                       _startTimer(4, 6, 8, 'long'); // Long button: inhale 4s, hold 6s, exhale 8s
