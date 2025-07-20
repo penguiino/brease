@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
   String _phase = "Inhale";
   int _seconds = 4;
   bool _isRunning = false;
-  String _currentTimer = 'none'; // Variable to track the current running timer
+  String _currentTimer = 'none';
 
   void _startTimer(int inhaleSeconds, int holdSeconds, int exhaleSeconds, String timerType) {
     setState(() {
@@ -36,10 +36,10 @@ class _HomePageState extends State<HomePage> {
       _progress = 0.0;
       _phase = "Inhale";
       _seconds = inhaleSeconds;
-      _currentTimer = timerType; // Set the current timer type
+      _currentTimer = timerType;
     });
 
-    // Enable wakelock to keep the screen on
+
     Wakelock.enable();
 
     _timer = Timer.periodic(const Duration(milliseconds: 50), (timer) {
@@ -67,17 +67,17 @@ class _HomePageState extends State<HomePage> {
       _isRunning = false;
       _progress = 0.0;
       _timer?.cancel();
-      _currentTimer = 'none'; // Reset the current timer type
+      _currentTimer = 'none';
     });
 
-    // Disable wakelock to allow the screen to turn off
+
     Wakelock.disable();
   }
 
   @override
   void dispose() {
     _timer?.cancel();
-    Wakelock.disable(); // Ensure wakelock is disabled when the widget is disposed
+    Wakelock.disable();
     super.dispose();
   }
 
@@ -101,7 +101,7 @@ class _HomePageState extends State<HomePage> {
                 percent: _progress,
                 center: Text(
                   _phase,
-                  style: const TextStyle(fontSize: 40.0, color: Colors.white70), // Changed color to white
+                  style: const TextStyle(fontSize: 40.0, color: Colors.white70),
                 ),
                 progressColor: Colors.blue,
               ),
@@ -111,14 +111,14 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   ElevatedButton(
                     onPressed: _isRunning && _currentTimer == 'short' ? _stopTimer : () {
-                      _startTimer(4, 4, 6, 'short'); // Short button: inhale 4s, hold 4s, exhale 6s
+                      _startTimer(4, 4, 6, 'short');
                     },
                     child: Text(_isRunning && _currentTimer == 'short' ? 'Stop' : 'Short'),
                   ),
                   const SizedBox(width: 20),
                   ElevatedButton(
                     onPressed: _isRunning && _currentTimer == 'long' ? _stopTimer : () {
-                      _startTimer(4, 6, 8, 'long'); // Long button: inhale 4s, hold 6s, exhale 8s
+                      _startTimer(4, 6, 8, 'long'); 
                     },
                     child: Text(_isRunning && _currentTimer == 'long' ? 'Stop' : 'Long'),
                   ),
